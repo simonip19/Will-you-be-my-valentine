@@ -35,17 +35,25 @@ yesBtn.addEventListener("click", () => {
 });
 
 // When user clicks No
-noBtn.addEventListener("mouseover", () => {
-    // No button moves around
-    const x = Math.random() * (window.innerWidth - 150);
-    const y = Math.random() * (window.innerHeight - 150);
+function moveNoButton() {
+    message.textContent = "Oh no! 💔 But that’s okay 😊";
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
     noBtn.style.position = "absolute";
     noBtn.style.left = `${x}px`;
     noBtn.style.top = `${y}px`;
+}
 
-    document.getElementById("tryNo").textContent = "Haha, I knew you wouldn't click No! 😏";
+// Desktop mouse hover
+noBtn.addEventListener("mouseover", moveNoButton);
+
+// Mobile touch
+noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault(); // Prevent default tap
+    moveNoButton();
 });
 
-noBtn.addEventListener("click", () => {
-    message.textContent = "Oh no! 💔 But that’s okay 😊";
+// Also move on click just in case
+noBtn.addEventListener("click", (e) => {
+    moveNoButton();
 });
